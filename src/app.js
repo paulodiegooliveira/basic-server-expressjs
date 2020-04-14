@@ -47,6 +47,17 @@ app.put("/clients/:id", (request, response) => {
   return response.json(costume);
 });
 
+app.delete("/clients/:id", (request, response) => {
+  const { id } = request.params;
+  const idIndexParam = clients.findIndex((param) => param.id === id);
+  console.log(idIndexParam);
+
+  if (idIndexParam < 0) return response.send("erro delete");
+
+  clients.splice(idIndexParam, 1);
+  return response.status(204).send();
+});
+
 app.listen(3333, () => {
   console.log("🚀 Server started");
 });
